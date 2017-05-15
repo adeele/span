@@ -1,4 +1,4 @@
-# arythmetic operations
+# arithmetic operations
 
 print(1 + 1)
 
@@ -38,7 +38,7 @@ def fun4(x):
     print(i)
 
 for i in 1:
-  print i
+  print(i)
 
 
 # number of arguments

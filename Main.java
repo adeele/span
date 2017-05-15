@@ -1,10 +1,7 @@
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -16,12 +13,14 @@ public class Main {
 
         // Create a stream of tokens fed by the lexer
         CommonTokenStream tokens = new CommonTokenStream(lexer);
+        tokens.fill();
+        System.out.println("Number of tokens: " + tokens.getTokens().size());
 
         // Create a parser that feeds off the tokens buffer
         Python3Parser parser = new Python3Parser(tokens);
 
-        // Begin parsing at rule prog
-        ParseTree tree = parser.prog();
+        // Begin parsing at file input
+        ParseTree tree = parser.file_input();
 
         // Create a generic parse tree walker that can trigger callbacks
         ParseTreeWalker walker = new ParseTreeWalker();
