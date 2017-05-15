@@ -1,4 +1,3 @@
-import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.*;
 
 public class TypeErrorListener extends Python3BaseListener {
@@ -9,20 +8,50 @@ public class TypeErrorListener extends Python3BaseListener {
     }
 
     @Override public void enterAugassign(Python3Parser.AugassignContext ctx) {
-        issues.add(new Issue(ctx.start.getLine(), 1, true, ctx.children.get(0).getText()));
+        issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(0).getText()));
     }
 
     @Override public void enterComp_op(Python3Parser.Comp_opContext ctx) {
         String operator = ctx.children.get(0).getText();
 
         if (!operator.equals("is") && !operator.equals("is not")) {
-            issues.add(new Issue(ctx.start.getLine(), 1, true, operator));
+            issues.add(new Issue(ctx.start.getLine(), 1, false, operator));
         }
     }
 
     @Override public void enterArith_expr(Python3Parser.Arith_exprContext ctx) {
         if (ctx.children.size() > 1) {
-            issues.add(new Issue(ctx.start.getLine(), 1, true, ctx.children.get(1).getText()));
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
+        }
+    }
+
+    @Override public void enterTerm(Python3Parser.TermContext ctx) {
+        if (ctx.children.size() > 1) {
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
+        }
+    }
+
+    @Override public void enterExpr(Python3Parser.ExprContext ctx) {
+        if (ctx.children.size() > 1) {
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
+        }
+    }
+
+    @Override public void enterXor_expr(Python3Parser.Xor_exprContext ctx) {
+        if (ctx.children.size() > 1) {
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
+        }
+    }
+
+    @Override public void enterAnd_expr(Python3Parser.And_exprContext ctx) {
+        if (ctx.children.size() > 1) {
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
+        }
+    }
+
+    @Override public void enterShift_expr(Python3Parser.Shift_exprContext ctx) {
+        if (ctx.children.size() > 1) {
+            issues.add(new Issue(ctx.start.getLine(), 1, false, ctx.children.get(1).getText()));
         }
     }
 

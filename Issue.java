@@ -11,22 +11,6 @@ public class Issue {
         this.details = details;
     }
 
-    public void setLine(int line) {
-        this.line = line;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public void setCertain(boolean certain) {
-        isCertain = certain;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
     public int getLine() {
         return line;
     }
