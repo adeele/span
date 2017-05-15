@@ -5,10 +5,10 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Create an input character stream
+        // Create an input file stream
         ANTLRFileStream input = new ANTLRFileStream("sample.py");
 
-        // Create an Lexer that feeds from that stream
+        // Create a lexer that feeds from that stream
         Python3Lexer lexer = new Python3Lexer(input);
 
         // Create a stream of tokens fed by the lexer
@@ -26,8 +26,10 @@ public class Main {
         ParseTreeWalker walker = new ParseTreeWalker();
 
         // Walk the tree created during the parse, trigger callbacks
-        walker.walk(new Python3BaseListener(), tree);
-        System.out.println(); // print a \n after translation
+        TypeErrorListener listener = new TypeErrorListener();
+        walker.walk(listener, tree);
+
+        ReportGenerator raport = new ReportGenerator(listener.getIssues());
     }
 }
 

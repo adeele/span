@@ -33,7 +33,7 @@ public class Python3BaseListener implements Python3Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFile_input(Python3Parser.File_inputContext ctx) { }
+	@Override public void exitFile_input(Python3Parser.File_inputContext ctx) {}
 	/**
 	 * {@inheritDoc}
 	 *
