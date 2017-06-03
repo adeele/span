@@ -1,0 +1,25 @@
+In sample.py:
+At line 2: possible TypeError exception of Type 1. Dangerous operation '+='.
+At line 3: possible TypeError exception of Type 1. Dangerous operation '%='.
+At line 4: possible TypeError exception of Type 1. Dangerous operation '<<='.
+At line 7: possible TypeError exception of Type 1. Dangerous operation '<'.
+At line 8: possible TypeError exception of Type 1. Dangerous operation '>='.
+At line 9: possible TypeError exception of Type 1. Dangerous operation 'in'.
+At line 17: possible TypeError exception of Type 1. Dangerous operation '+'.
+At line 18: possible TypeError exception of Type 1. Dangerous operation '*'.
+At line 19: possible TypeError exception of Type 1. Dangerous operation '<<'.
+At line 22: possible TypeError exception of Type 3. Function len() may not take given number of arguments.
+At line 23: possible TypeError exception of Type 3. Function len() may not take given number of arguments.
+At line 24: possible TypeError exception of Type 3. Function len() may not take given number of arguments.
+At line 27: possible TypeError exception of Type 2. Array index may not be an integer.
+At line 28: possible TypeError exception of Type 2. Array index may not be an integer.
+At line 29: possible TypeError exception of Type 2. Array index may not be an integer.
+At line 32: possible TypeError exception of Type 1. Dangerous operation '[1,2]'.
+At line 33: possible TypeError exception of Type 3. Function print() may not take given number of arguments.
+At line 35: possible TypeError exception of Type 1. Dangerous operation 'x'.
+At line 36: possible TypeError exception of Type 3. Function print() may not take given number of arguments.
+At line 38: possible TypeError exception of Type 1. Dangerous operation '1'.
+At line 39: possible TypeError exception of Type 3. Function print() may not take given number of arguments.
+At line 42: possible TypeError exception of Type 3. Function len() may not take given number of arguments.
+At line 45: possible TypeError exception of Type 3. Function print() may not take given number of arguments.
+At line 47: possible TypeError exception of Type 3. Function len() may not take given number of arguments.

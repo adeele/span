@@ -1,15 +1,44 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class ReportGenerator {
-    public ReportGenerator(ArrayList<Issue> issues) {
+    public ReportGenerator(ArrayList<Issue> issues, String fileName, String output) {
+        PrintStream out = null;
+
+        if (output == "") {
+            output = "report";
+        }
+
+        try {
+            out = new PrintStream(new FileOutputStream(output + ".md"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.setOut(out);
+        System.out.println("_In " + fileName + ":_");
+
+        int howManyCertain = 0;
+
+        for (Issue i : issues) {
+            if (i.getIsCertain()) {
+                howManyCertain++;
+            }
+        }
+
+
+        System.out.println("**" + issues.size() + " warning(s) found, " + howManyCertain + " certain exceptions**");
+
         for (Issue i : issues) {
             System.out.println("At line " +
                     i.getLine() +
-                    ": " +
+                    ": **" +
                     translateIsCertain(i.getIsCertain()) +
-                    " TypeError exception of Type " +
+                    "** _TypeError_ exception of _Type " +
                     i.getType() +
-                    ". " +
+                    "_. " +
                     translateDetails(i.getType(), i.getDetails())
             );
         }

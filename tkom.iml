@@ -16,5 +16,20 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/tools/commons-cli-1.4" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$USER_HOME$/tools/commons-cli-1.4/apidocs" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="file://$USER_HOME$/tools/commons-cli-1.4" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/tools/commons-cli-1.4" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/tools/commons-cli-1.4" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
