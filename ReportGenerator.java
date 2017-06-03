@@ -1,24 +1,9 @@
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ReportGenerator {
-    public ReportGenerator(ArrayList<Issue> issues, String fileName, String output) {
-        PrintStream out = null;
-
-        if (output == "") {
-            output = "report";
-        }
-
-        try {
-            out = new PrintStream(new FileOutputStream(output + ".md"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        System.setOut(out);
-        System.out.println("_In " + fileName + ":_");
+    public ReportGenerator(ArrayList<Issue> issues, String fileName, BufferedWriter bw) throws IOException {
+        bw.write("_In " + fileName + ":_\n");
 
         int howManyCertain = 0;
 
@@ -29,19 +14,22 @@ public class ReportGenerator {
         }
 
 
-        System.out.println("**" + issues.size() + " warning(s) found, " + howManyCertain + " certain exceptions**");
+        bw.write("**" + issues.size() + " warning(s) found, " + howManyCertain + " certain exceptions**\n");
 
         for (Issue i : issues) {
-            System.out.println("At line " +
+            bw.write("At line " +
                     i.getLine() +
                     ": **" +
                     translateIsCertain(i.getIsCertain()) +
                     "** _TypeError_ exception of _Type " +
                     i.getType() +
                     "_. " +
-                    translateDetails(i.getType(), i.getDetails())
+                    translateDetails(i.getType(), i.getDetails()) +
+                    "\n"
             );
         }
+
+        bw.write("\n");
     }
 
     private String translateDetails(int type, String details) {
