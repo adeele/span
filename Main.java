@@ -3,8 +3,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.apache.commons.cli.*;
-
 import java.io.*;
+
+enum Mode { SOFT, NORMAL, HARD }
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -30,13 +31,13 @@ public class Main {
             return;
         }
 
+        Mode mode = Mode.NORMAL;
+
         // Handle hard and soft parameter
         if (cmd.hasOption("hard") || cmd.hasOption("h")) {
-            // TODO: do not filter
+            mode = Mode.HARD;
         } else if (cmd.hasOption("soft") || cmd.hasOption("s")) {
-            // TODO: filter results for certain exceptions
-        } else {
-            // TODO: filter results only for Type 1 and Type 2
+            mode = Mode.SOFT;
         }
 
         String output = "";
@@ -114,7 +115,7 @@ public class Main {
             TypeErrorListener listener = new TypeErrorListener();
             walker.walk(listener, tree);
 
-            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file.getName(), bw);
+            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file.getName(), bw, mode);
         }
 
         // Close writing buffer
