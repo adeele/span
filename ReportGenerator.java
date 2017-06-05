@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ReportGenerator {
-    public ReportGenerator(ArrayList<Issue> issues, String fileName, BufferedWriter bw, Mode mode) throws IOException {
+    public ReportGenerator(ArrayList<Issue> issues, String fileName, BufferedWriter bw, Mode mode, int numberOfLines) throws IOException {
         bw.write("_In " + fileName + ":_  \n");
 
         int howManyCertain = 0;
@@ -14,6 +14,19 @@ public class ReportGenerator {
         }
 
         bw.write("**" + issues.size() + " warning(s) found, " + howManyCertain + " certain exceptions**  \n");
+
+        String dangerLevel = "LOW";
+        double ratio = (double)howManyCertain / (double) issues.size();
+
+        if (ratio > (double)2/3) {
+            dangerLevel = "HIGH";
+        } else if (ratio > (double)1/3) {
+            dangerLevel = "MEDIUM";
+        }
+
+
+        bw.write("**" + (int)((double) issues.size() / (double) numberOfLines * 100) + "% dangerous, classified to " + dangerLevel + " level of danger**  \n");
+
 
         for (Issue i : issues) {
             if (mode == Mode.HARD || (mode == Mode.NORMAL && i.getType() == 1) || (mode == Mode.SOFT && i.getIsCertain())) {

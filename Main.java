@@ -3,7 +3,11 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FileUtils;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 enum Mode { SOFT, NORMAL, HARD }
 
@@ -55,16 +59,21 @@ public class Main {
         FileOutputStream fos = new FileOutputStream(fout);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
-        File[] files;
+        ArrayList<File> files = new ArrayList<File>();
         File directory;
 
         // Handle file and directory parameter
         if (cmd.hasOption("file") || cmd.hasOption("f")) {
-            files = new File[]{ new File(cmd.getOptionValue("file")) };
+            files.add(new File(cmd.getOptionValue("file")));
 
             // Check if file exists
-            if (!files[0].exists() || files[0].isDirectory()) {
-                System.out.println("File with given name does not exist.");
+            if (files.get(0).exists() || files.get(0).isDirectory()) {
+                System.out.println("File " + files.get(0).getName() + " does not exist.");
+                return;
+            }
+
+            if (!files.get(0).getName().endsWith(".py")) {
+                System.out.println("File " + files.get(0).getName() + " is not Python file.");
                 return;
             }
         } else {
@@ -72,17 +81,16 @@ public class Main {
                 directory = new File(cmd.getOptionValue("directory"));
 
                 if (directory.exists() && directory.isDirectory()) {
-                    files = directory.listFiles();
+                    String[] extensions = { "py" };
+                    files = new ArrayList<>(FileUtils.listFiles(directory, extensions, true));
                 } else {
+                    System.out.println("Directory " + directory.getName() + " does not exist.");
                     return;
                 }
             } else {
+                System.out.println("No files given to analyse.");
                 return;
             }
-        }
-
-        if (files.length == 0) {
-            System.out.println("No files given to analyse.");
         }
 
         for (File file : files) {
@@ -105,7 +113,7 @@ public class Main {
             // Check if file is correct
             if (parser.getNumberOfSyntaxErrors() > 0) {
                 System.out.println("File " + file.getName() + " is not syntactically correct.");
-                break;
+                continue;
             }
 
             // Create a generic parse tree walker that can trigger callbacks
@@ -115,7 +123,12 @@ public class Main {
             TypeErrorListener listener = new TypeErrorListener();
             walker.walk(listener, tree);
 
-            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file.getName(), bw, mode);
+            LineNumberReader  lnr = new LineNumberReader(new FileReader(file));
+            lnr.skip(Long.MAX_VALUE);
+
+            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file.getName(), bw, mode, lnr.getLineNumber());
+
+            lnr.close();
         }
 
         // Close writing buffer

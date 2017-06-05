@@ -31,5 +31,17 @@
         <jarDirectory url="file://$USER_HOME$/tools/commons-cli-1.4" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/tools/commons-io-2.5" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$USER_HOME$/tools/commons-io-2.5/docs" />
+        </JAVADOC>
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/tools/commons-io-2.5" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
