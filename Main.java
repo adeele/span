@@ -66,8 +66,10 @@ public class Main {
         if (cmd.hasOption("file") || cmd.hasOption("f")) {
             files.add(new File(cmd.getOptionValue("file")));
 
+            File f = files.get(0);
+
             // Check if file exists
-            if (files.get(0).exists() || files.get(0).isDirectory()) {
+            if (!files.get(0).exists() || files.get(0).isDirectory()) {
                 System.out.println("File " + files.get(0).getName() + " does not exist.");
                 return;
             }
@@ -126,7 +128,7 @@ public class Main {
             LineNumberReader  lnr = new LineNumberReader(new FileReader(file));
             lnr.skip(Long.MAX_VALUE);
 
-            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file.getName(), bw, mode, lnr.getLineNumber());
+            ReportGenerator raport = new ReportGenerator(listener.getIssues(), file, bw, mode, lnr.getLineNumber());
 
             lnr.close();
         }

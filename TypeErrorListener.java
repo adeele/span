@@ -145,14 +145,14 @@ public class TypeErrorListener extends Python3BaseListener {
         int type1 = arg1.getStart().getType();
         int type2 = arg2.getStart().getType();
 
-        // Exception will be thrown if types are different and one of them is string or byte
-        if (type1 != type2 && ((type1 == 36 || type2 == 36) || (type1 == 37 || type2 == 37))) {
-            return Danger.CERTAIN;
-        }
-
         // Exception may be thrown if types are variables
         if (type1 == 35 || type2 == 35) {
             return Danger.POSSIBLE;
+        }
+
+        // Exception will be thrown if types are different and one of them is string or byte
+        if (type1 != type2 && ((type1 == 36 || type2 == 36) || (type1 == 37 || type2 == 37))) {
+            return Danger.CERTAIN;
         }
 
         return Danger.NONE;
