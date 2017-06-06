@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tkom:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tkom_jar</output-path>
+    <root id="archive" name="tkom.jar">
+      <element id="module-output" name="tkom" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-cli-1.4/commons-cli-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-cli-1.4/commons-cli-1.4-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-cli-1.4/commons-cli-1.4-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-cli-1.4/commons-cli-1.4-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-cli-1.4/commons-cli-1.4-test-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/local/lib/antlr-4.5.3-complete.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-io-2.5/commons-io-2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/tools/commons-io-2.5/commons-io-2.5-javadoc.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
